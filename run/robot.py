@@ -151,11 +151,10 @@ class Robot(object):
         measured_speed = self.imu.read_accelerometer()
         return measured_speed[0]
 
-    '''def check_stopped(self):
+    def check_stopped(self):
         #This will count how long the robot has been stuck
         current_speed = self.get_speed()
         if (current_speed == 0 or current_speed <= 0.01):
-            return True
-        return False'''
+            self.stuck_since = time.time()
 
 
