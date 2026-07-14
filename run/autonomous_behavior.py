@@ -1,6 +1,7 @@
 from robot import Robot
 import time
 import threading
+import asyncio
 
 class AutonomousBehavior:
     def __init__(self, the_robot):
@@ -11,6 +12,10 @@ class AutonomousBehavior:
         self.left_dist = 15
         self.angle_distance = [[90,0],[0,0],[-90,0]]
         self.stopinng_distance_in = 10
+
+        self.forward_distance = self.angle_distance[1][1]
+        self.left_distance = self.angle_distance[0][1]
+        self.right_distance = self.angle_distance[2][1]
     
     def set_pan_start(self):
         self.angle = 0
@@ -19,18 +24,18 @@ class AutonomousBehavior:
     def find_forward_dist(self):
         self.angle = 0
         #self.angle_distance[1][0] = self.angle
-        self.angle_distance[1][1] = self.robot.return_distance_at(self.angle)
+        self.forward_distance = self.robot.return_distance_at(self.angle)
         #print(self.angle_distance[1][1])
     
     def find_left_dist(self):
         self.angle = 90
         #self.angle_distance[0][0] = self.angle
-        self.angle_distance[0][1] = self.robot.return_distance_at(self.angle)
+        self.self.left_distance = self.robot.return_distance_at(self.angle)
     
     def find_right_dist(self):
         self.angle = -90
         #self.angle_distance[2][0] = self.angle
-        self.angle_distance[2][1] = self.robot.return_distance_at(self.angle)
+        self.right_distance = self.robot.return_distance_at(self.angle)
     
     def test_sensor(self):
         test_index = 0
@@ -59,7 +64,7 @@ class AutonomousBehavior:
             print(self.angle_distance)
             print(self.robot.get_speed())
             
-            if (self.angle_distance[1][1] > self.stopinng_distance_in):
+            if (self.forward_distance > self.stopinng_distance_in):
                 self.robot.go_straight(speed)
                 print('going forward...')
                 check = threading.Thread.start(Robot.check_stopped())
@@ -73,13 +78,13 @@ class AutonomousBehavior:
                         print("Stopped...\nTurning Around...")
                         start = time.perf_counter()
 
-                        if(self.angle_distance[0][1] > self.stopinng_distance_in):
+                        if(self.left_distance > self.stopinng_distance_in):
                             self.robot.go_backwards(speed)
                             time.sleep(0.5)
                             self.robot.turn_left(speed)
                             time.sleep(1.5)
 
-                        elif(self.angle_distance[2][1] > self.stopinng_distance_in):
+                        elif(self.right_distance > self.stopinng_distance_in):
                             self.robot.go_backwards(speed)
                             time.sleep(0.5)
                             self.robot.turn_right(speed)
@@ -106,11 +111,11 @@ class AutonomousBehavior:
                             '''
                             '''Include manual takeover?'''
 
-            elif (self.angle_distance[0][1] > self.stopinng_distance_in):
+            elif (self.left_distance > self.stopinng_distance_in):
                 self.robot.turn_left(speed)
                 print('turning left...')
 
-            elif (self.angle_distance[2][1] > self.stopinng_distance_in):
+            elif (self.right_distance > self.stopinng_distance_in):
                 self.robot.turn_right(speed)
                 print('turn right...')
 
