@@ -7,13 +7,11 @@ from robot import RPibot
 import asyncio
 import time
 
-'''
-Basic remote control for robot based on GPIOzero website.
-Needs to be modified to accomodate butterbot's 4wd and 
-the Raspi_MotorHAT library I am using.
-For now this serves as a guideline to adapt into usable 
-code later.k
-'''
+
+"""
+Will be used to control the robot for RC from a computer in AP mode. Will use async for the different components of controlling the movements and waiting for commands,
+Will use multithreading to put Pentesting processes on a different thread.
+"""
 
 last_heartbeat = None
 
