@@ -9,7 +9,7 @@ import threading
 import time, atexit
 from randint_test import randomBinary
 
-class Robot(object):
+class RPibot(object):
     def __init__(self, motorhat_addr=0x6f):
         #setup the motorhat with the passed in address
         self._mh = Raspi_MotorHAT(addr=motorhat_addr)
