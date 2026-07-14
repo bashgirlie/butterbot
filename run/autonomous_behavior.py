@@ -66,7 +66,7 @@ class AutonomousBehavior:
 
                 if (check == True):
                     time.sleep(0.5)
-                    check2 = Robot3.check_stopped()
+                    check2 = Robot.check_stopped()
 
                     if (check2 == True):
 
