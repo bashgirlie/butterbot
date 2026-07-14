@@ -62,7 +62,7 @@ class AutonomousBehavior:
             if (self.angle_distance[1][1] > self.stopinng_distance_in):
                 self.robot.go_straight(speed)
                 print('going forward...')
-                check = threading.Thread.start(Robot3.check_stopped())
+                check = threading.Thread.start(Robot.check_stopped())
 
                 if (check == True):
                     time.sleep(0.5)
