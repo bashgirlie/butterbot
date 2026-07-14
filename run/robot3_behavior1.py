@@ -1,8 +1,8 @@
-from robot3 import Robot3
+from robot import Robot
 import time
 import threading
 
-class Robot3Behavior:
+class AutonomousBehavior:
     def __init__(self, the_robot):
         self.robot = the_robot
         self.angle = 0
@@ -45,54 +45,8 @@ class Robot3Behavior:
             print(self.angle_distance)
             test_index +=1
 
-    def run_behavior(self, speed):
-        self.set_pan_start()
-        while True:
-            self.find_forward_dist()
-            if self.angle_distance[1] < 12:
-                self.robot.stop_motors()
-                self.find_right_dist()
-                if self.angle_distance[1] > 12:
-                    self.robot.turn_right(speed)
-                    time.sleep(0.5)
-                elif self.angle_distance[1] < 12:
-                    self.find_left_dist()
-                    if self.angle_distance[1] < 12:
-                        self.robot.go_backwards(speed)
-                        time.sleep(0.5)
-                    elif self.angle_distance[1] > 12:
-                        self.robot.turn_left(speed)
-                        time.sleep(0.5)
-            else:
-                self.robot.go_straight(speed)
-                time.sleep(0.5)
     
-    def run2(self, speed):
-        self.set_pan_start()
-        while True:
-            self.find_forward_dist()
-            time.sleep(0.02)
-            self.find_right_dist()
-            time.sleep(0.02)
-            self.find_left_dist()
-            time.sleep(0.02)
-            print(self.angle_distance)
-            if self.angle_distance[1][1] < self.stopinng_distance_in:
-                self.robot.stop_motors()
-                time.sleep(0.02)
-                if self.angle_distance[2][1] > self.stopinng_distance_in:
-                    self.robot.turn_right(speed)
-                elif self.angle_distance[2][1] < self.stopinng_distance_in:
-                    if self.angle_distance[0][1] > self.stopinng_distance_in:
-                        self.robot.turn_left(speed)
-                    elif self.angle_distance[0][1] < self.stopinng_distance_in:
-                        self.robot.go_backwards(speed)
-                        time.sleep(0)
-                        
-            else:
-                self.robot.go_straight(speed)
-    
-    def run3(self, speed):
+    def run(self, speed):
         sleepy = 0.25
         while True:
             self.find_forward_dist()
@@ -164,12 +118,4 @@ class Robot3Behavior:
                 self.robot.stop_all()
                 print('stopping...')
             
-            
-
-if __name__ == '__main__':
-    bot = Robot3()
-    behavior = Robot3Behavior(bot)
-    behavior.run3(20)
-    behavior.test_sensor()
-
     
