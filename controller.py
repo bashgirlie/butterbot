@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 import asyncio
-import pyinputs
 import time
 
 class Controller:
     """
-    Script to run on computer that is controlling butterbot.
+    Init and control Pi hardware, namely the GPIO pins
     """
     def __init__(self):
         pass
