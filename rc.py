@@ -9,7 +9,7 @@ import time
 
 
 """
-Will be used to control the robot for RC from a computer in AP mode. Will use async for the different components of controlling the movements and waiting for commands,
+Run on RaspberryPi bot with AP mode enabled on the Pi. Will use async for the different components of controlling the movements and waiting for commands,
 Will use multithreading to put Pentesting processes on a different thread.
 """
 
